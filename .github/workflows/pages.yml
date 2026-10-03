@@ -1,0 +1,63 @@
+name: Pages
+
+# 기관 데이터는 eduroam-kr-db 에 있다. 화면은 브라우저가 db 에서 직접 받아
+# 최신으로 덮어쓰므로, 데이터가 바뀌었다고 여기를 다시 빌드할 필요는 없다.
+# 빌드에 박히는 값은 JS 가 꺼져 있거나 db 가 죽었을 때 쓰는 대비책이다.
+# 그 대비책까지 최신으로 맞추고 싶으면 손으로 돌리거나 db 에서 dispatch 를 쏜다.
+
+on:
+  push:
+    branches: ["main"]
+  repository_dispatch:
+    types: [db-updated]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: eduroam-kr-db 에서 기관 데이터 받기
+        run: ./bin/fetch-data.sh
+      - uses: actions/configure-pages@v5
+        id: pages
+      - run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+      - name: 링크와 빌드 결과 확인
+        run: |
+          test -s _site/index.html
+          test -s _site/en/index.html
+          test -s _site/map/index.html
+          grep -q 'eduroam' _site/index.html
+          # front matter 가 깨지면 Jekyll 이 조용히 레이아웃 없이 본문만 내놓는다.
+          # description 안의 콜론 하나로 그렇게 된 적이 있다. 그대로 배포되지 않게 막는다.
+          bare=$(find _site -name '*.html' ! -exec grep -qil '^<!doctype html>' {} \; -print)
+          test -z "$bare" || { echo "레이아웃 없이 생성된 페이지:"; echo "$bare"; exit 1; }
+          echo "- 기관 $(python3 -c 'import json;print(json.load(open("_data/institutions.json"))["count"])')개" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
