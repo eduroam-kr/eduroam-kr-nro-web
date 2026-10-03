@@ -1,0 +1,109 @@
+---
+---
+/* 공식 웹사이트 고유 스타일. 머리글·바닥글·제목 크기·목차·인쇄 같은 공통 분은
+   multipage-jekyll-site-theme 이 맡는다. 여기에는 이 사이트에만 있는 것만 둔다 —
+   첫 화면 큰 그림, 지도, 기관 목록, 접속 정보 표. */
+
+/* 첫 화면의 큰 그림. 사진 위 글자는 테마와 무관하게 흰색이어야 읽히므로 이 블록만
+   색을 직접 정한다. 사진에 밝은 데가 있어 어두운 막을 한 겹 깐다 — 막이 없으면
+   은하 쪽에서 글자가 사라진다. */
+.hero {
+  position: relative;
+  min-height: 22rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #08182a;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: var(--bs-border-radius-lg);
+  overflow: hidden;
+  color: #fff;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(4, 16, 30, .3), rgba(4, 16, 30, .72));
+}
+.hero > * { position: relative; }
+.hero-eyebrow { font-size: 1.05rem; margin-bottom: .3rem; }
+.hero-title {
+  font-weight: 800;
+  line-height: 1.25;
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  margin: 0 0 .9rem;
+}
+.hero-sub { margin: 0; font-size: clamp(.95rem, 2.3vw, 1.1rem); }
+@media (max-width: 575.98px) { .hero { min-height: 16rem; } }
+
+/* 소개의 장점 칸. 아이콘을 크게 두고 글은 짧게. */
+.pros .fa-solid { font-size: 1.6rem; color: var(--bs-primary); }
+
+#map { height: 70vh; min-height: 24rem; border-radius: var(--bs-border-radius); }
+
+/* 다크 모드에서 지도만 밝으면 눈이 아프다. 타일에 필터를 걸어 어둡게 만든다.
+   어두운 타일 제공자를 따로 쓰면 출처가 둘이 되고 사용량 제한이 붙는다.
+   필터는 타일에만 걸고 표식과 팝업에는 걸지 않는다. */
+[data-bs-theme="dark"] .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(.92) contrast(.9) saturate(.7);
+}
+[data-bs-theme="dark"] .leaflet-container { background: #1c2733; }
+.leaflet-popup-content { margin: .6rem .8rem; font-size: .875rem; }
+.leaflet-popup-content img { height: 1.5rem; width: auto; max-width: 6rem; object-fit: contain; }
+
+.notice-body h2 { font-size: 1.25rem; }
+.notice-body h3 { font-size: 1.1rem; }
+
+/* 공지 블록은 오래되면 JS 가 감춘다. JS 가 꺼져 있으면 그냥 보인다. */
+[data-notice-fresh][hidden] { display: none !important; }
+
+/* ── 좁은 화면 ─────────────────────────────────────────────── */
+
+/* 항목/값 두 칸짜리 표. 폰에서 항목 칸이 절반을 가져가면 값이 한두 글자씩 끊긴다.
+   항목은 짧고 값이 기니 칸 너비를 고정해서 값 쪽에 자리를 넘긴다. */
+.table-kv { table-layout: fixed; }
+.table-kv th { width: 30%; }
+
+@media (max-width: 575.98px) {
+  .table-kv th { width: 36%; font-size: .8125rem; }
+  .table-kv th, .table-kv td { padding: .5rem; }
+}
+
+/* realm 은 점이 많은 긴 문자열이라 좁은 화면에서 표를 밀어낸다. */
+.table code { word-break: break-all; }
+
+/* 지도는 세로 화면에서 70vh 가 지나치게 길다. */
+@media (max-width: 575.98px) {
+  #map { height: 55vh; min-height: 18rem; }
+  h2 { margin-top: 2.25rem; }
+}
+
+/* 기관 목록은 표가 아니라 줄 단위 카드다. 표로 두면 칸이 다섯이라 폰에서
+   realm 이 화면 밖으로 밀리고, 칸을 감추면 폰에서 로고가 통째로 사라진다.
+   flex 로 두면 좁아질 때 로고는 그대로 두고 이름 칸만 줄어든다. */
+.inst { display: flex; align-items: center; gap: .875rem; }
+.inst-logo { flex: 0 0 3rem; width: 3rem; height: 2.25rem; object-fit: contain; }
+.inst-main { flex: 1 1 auto; min-width: 0; }
+.inst-name { font-weight: 600; }
+.inst-realms code { font-size: .8125rem; word-break: break-all; }
+.inst-realms code + code { margin-left: .5rem; }
+/* 목록 위의 설명 줄. 카드와 같은 자리에 같은 모양으로 낱말을 놓아서, 어느 자리가
+   무엇인지 선 하나 긋지 않고 보이게 한다. 좁은 화면에서도 같이 쌓인다. */
+.inst-legend { padding: .5rem 1.1rem; border-bottom: 1px solid var(--bs-border-color); }
+.inst-legend .inst-name { font-weight: 600; }
+.inst-logo-slot { flex: 0 0 3rem; width: 3rem; text-align: center; }
+
+/* 안내 링크가 없는 기관이 있어 자리를 비워 둬야 가입 연도가 세로로 맞는다. */
+.inst-guide { display: inline-block; min-width: 2.5rem; text-align: right; }
+.inst-side {
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  font-size: .875rem;
+  white-space: nowrap;
+}

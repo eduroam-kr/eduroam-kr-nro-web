@@ -1,0 +1,24 @@
+- url: /about/
+  icon: fa-circle-info
+  title: 소개
+  title_en: About
+- url: /connect/
+  icon: fa-wifi
+  title: 접속 방법
+  title_en: Connecting
+- url: /map/
+  icon: fa-map-location-dot
+  title: 서비스 지역
+  title_en: Coverage
+- url: /join/
+  icon: fa-building-columns
+  title: 기관 가입
+  title_en: Join
+- url: /notices/
+  icon: fa-bullhorn
+  title: 공지
+  title_en: Notices
+- url: /policy/
+  icon: fa-shield-halved
+  title: 이용 정책
+  title_en: Policy
