@@ -1,0 +1,89 @@
+---
+layout: default
+lang: ko
+title: 접속 방법
+permalink: /connect/
+description: "eduroam 접속에 필요한 설정값과 Windows·macOS·iOS·Android 설정 방법. CA 인증서 확인 방법과 유의사항을 함께 안내합니다."
+---
+<div class="container wrap py-5">
+  <h1>접속 방법</h1>
+  <p>소속 기관 계정으로 접속합니다. 방문한 기관에서 계정을 따로 받을 필요가 없습니다.</p>
+
+  <div class="alert alert-primary" role="alert">
+    <strong>소속 기관 안내 페이지를 먼저 확인하세요.</strong>
+    realm, 인증서 값, 이용 가능한 장소는 기관마다 다릅니다.
+    <a class="alert-link" href="{{ '/map/#list' | relative_url }}">기관 목록에서 찾아보기</a>
+  </div>
+
+  <h2>접속 정보</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle table-kv">
+      <tbody>
+        <tr><th scope="row">네트워크 이름(SSID)</th><td><code>eduroam</code></td></tr>
+        <tr><th scope="row">보안</th><td>WPA2/WPA3 엔터프라이즈</td></tr>
+        <tr><th scope="row">EAP 방식</th><td>PEAP 또는 TTLS (기관마다 다름)</td></tr>
+        <tr><th scope="row">아이디</th><td><code>아이디@소속기관도메인</code> — 예: <code>hong@example.ac.kr</code></td></tr>
+        <tr><th scope="row">비밀번호</th><td>소속 기관 Wi-Fi 비밀번호</td></tr>
+        <tr><th scope="row">익명 아이디</th><td><code>anonymous@소속기관도메인</code> (입력란이 있을 때만)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>아이디에서 <code>@소속기관도메인</code>을 빼면 접속되지 않습니다.</strong> 인증 요청을 어느 기관으로 보낼지 정하는 값입니다.</p>
+  <ul>
+    <li>국내 기관의 소속기관도메인은 <code>.kr</code> 로 끝납니다.</li>
+    <li>학교 메일 주소와 같을 수도 있고 다를 수도 있습니다. 메일 주소라고 생각하고 넣으면 틀릴 수 있습니다.</li>
+    <li>정확한 값은 소속 기관 eduroam 안내 페이지에서 확인하세요.</li>
+  </ul>
+
+  <h2>CA 인증서 설치</h2>
+  <div class="alert alert-danger" role="alert">
+    <strong>CA 인증서를 설치하지 않거나 인증서 지문을 확인하지 않고 접속하지 마십시오.</strong>
+    확인을 건너뛰면 <strong>eduroam</strong>이라는 같은 이름으로 위장한 가짜 접속점에 연결될 수 있고,
+    그 경우 입력한 아이디와 비밀번호가 공격자에게 그대로 넘어갑니다.
+  </div>
+  <p>인증서 파일과 지문 값은 <strong>소속 기관</strong>이 공개합니다. 방문한 기관 것이 아니라 소속 기관 것을 사용하세요.</p>
+
+  <h3>OS별 설정 방법</h3>
+  <details class="border rounded p-3 mb-2">
+    <summary class="fw-semibold">Windows</summary>
+    <div class="pt-2">
+      <ol>
+        <li>소속 기관 CA 인증서를 내려받아 두 번 누릅니다. <strong>인증서 설치</strong> → 저장소 위치 <strong>현재 사용자</strong> → <strong>모든 인증서를 다음 저장소에 저장</strong> → <strong>신뢰할 수 있는 루트 인증 기관</strong>.</li>
+        <li>Wi-Fi 목록에서 <strong>eduroam</strong>을 선택합니다.</li>
+        <li><code>아이디@소속기관도메인</code>과 비밀번호를 입력합니다.</li>
+        <li>인증서 확인 창에서 <strong>인증서 세부 정보 표시</strong>를 눌러, 인증서 이름과 지문이 기관이 공개한 값과 같은지 확인한 뒤 연결합니다. Windows 연결 창은 SHA-1 을 보여줍니다.</li>
+      </ol>
+    </div>
+  </details>
+  <details class="border rounded p-3 mb-2">
+    <summary class="fw-semibold">macOS · iOS · iPadOS</summary>
+    <div class="pt-2">
+      <ol>
+        <li>macOS: CA 인증서를 내려받아 두 번 누르면 <strong>키체인 접근</strong>의 <strong>로그인</strong> 키체인에 들어갑니다. 다시 두 번 눌러 <strong>신뢰</strong>를 펼치고 <strong>이 인증서 사용 시</strong>를 <strong>항상 신뢰</strong>로 바꿉니다.</li>
+        <li>iOS·iPadOS: Safari 로 내려받은 뒤 <strong>설정 → 일반 → VPN 및 기기 관리</strong>에서 프로파일을 설치하고, 이어서 <strong>설정 → 일반 → 정보 → 인증서 신뢰 설정</strong>에서 켭니다. 이 마지막 단계를 빠뜨리면 신뢰되지 않습니다.</li>
+        <li>Wi-Fi 목록에서 <strong>eduroam</strong>을 선택하고 계정을 입력합니다.</li>
+        <li>인증서 화면에서 이름과 지문을 확인한 뒤 <strong>신뢰</strong>를 누릅니다. macOS·iOS 는 SHA-256 을 보여줍니다.</li>
+      </ol>
+    </div>
+  </details>
+  <details class="border rounded p-3 mb-2">
+    <summary class="fw-semibold">Android</summary>
+    <div class="pt-2">
+      <ol>
+        <li>CA 인증서를 내려받아 <strong>설정 → 보안 → 암호화 및 자격 증명 → 인증서 설치 → CA 인증서</strong>에서 설치합니다. 메뉴 이름은 제조사와 버전에 따라 다릅니다.</li>
+        <li>Wi-Fi 목록에서 <strong>eduroam</strong>을 고릅니다.</li>
+        <li>EAP 방식과 2단계 인증은 기관 안내대로 선택하고, <strong>CA 인증서</strong>는 방금 설치한 것을 지정합니다. <strong>도메인</strong> 칸에는 기관이 안내한 서버 이름을 넣습니다.</li>
+        <li>계정을 입력하고 연결합니다. <strong>인증 안 함</strong>이나 <strong>확인하지 않음</strong>은 선택하지 마세요.</li>
+      </ol>
+    </div>
+  </details>
+
+  <h2>보안 정책</h2>
+  <ul>
+    <li>계정은 본인만 사용해야 하며 타인에게 양도하거나 공유할 수 없습니다.</li>
+    <li>eduroam 은 인증 처리를 위해 접속 기록을 남깁니다. 기록은 소속 기관과 방문 기관 양쪽에 보관되며, 장애 처리와 보안 사고 대응 목적으로만 이용합니다.</li>
+    <li>기관에 따라 포트 차단이나 대역폭 제한이 있습니다. 방문한 기관의 정책을 따라야 합니다.</li>
+    <li>저작권 침해, 무단 침입, 악성코드 유포 등 관계 법령을 위반하는 행위가 확인되면 사전 통보 없이 접속을 차단하고 소속 기관에 통보합니다.</li>
+  </ul>
+  <p><a href="{{ '/policy/' | relative_url }}">대한민국 eduroam 이용 정책 →</a></p>
+</div>

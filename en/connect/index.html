@@ -1,0 +1,89 @@
+---
+layout: default
+lang: en
+title: Connecting
+permalink: /en/connect/
+description: "Settings you need for eduroam and setup steps for Windows, macOS, iOS and Android, including how to check the CA certificate."
+---
+<div class="container wrap py-5">
+  <h1>Connecting</h1>
+  <p>You connect with the account from your home institution. No guest account is issued at the site you visit.</p>
+
+  <div class="alert alert-primary" role="alert">
+    <strong>Check your home institution's page first.</strong>
+    The realm, the certificate values and the covered buildings differ per institution.
+    <a class="alert-link" href="{{ '/en/map/#list' | relative_url }}">Find it in the institution list</a>
+  </div>
+
+  <h2>Connection settings</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle table-kv">
+      <tbody>
+        <tr><th scope="row">Network name (SSID)</th><td><code>eduroam</code></td></tr>
+        <tr><th scope="row">Security</th><td>WPA2/WPA3 Enterprise</td></tr>
+        <tr><th scope="row">EAP method</th><td>PEAP or TTLS (varies by institution)</td></tr>
+        <tr><th scope="row">Username</th><td><code>username@your-institution-domain</code> — e.g. <code>hong@example.ac.kr</code></td></tr>
+        <tr><th scope="row">Password</th><td>Your home institution Wi-Fi password</td></tr>
+        <tr><th scope="row">Anonymous identity</th><td><code>anonymous@your-institution-domain</code> (only if the field exists)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Dropping <code>@your-institution-domain</code> breaks the login.</strong> That part decides which institution the request is routed to.</p>
+  <ul>
+    <li>For Korean institutions the domain ends in <code>.kr</code>.</li>
+    <li>It may or may not match your campus email address. Do not assume it is your email.</li>
+    <li>Check your home institution's eduroam guide page for the exact value.</li>
+  </ul>
+
+  <h2>Install the CA certificate first</h2>
+  <div class="alert alert-danger" role="alert">
+    <strong>Do not connect without installing the CA certificate and checking the fingerprint.</strong>
+    Skipping the check can put you on a rogue access point broadcasting the same <strong>eduroam</strong> name,
+    and your username and password would go straight to the attacker.
+  </div>
+  <p>The certificate file and its fingerprints are published by <strong>your home institution</strong> — not by the site you are visiting.</p>
+
+  <h3>Per-OS setup</h3>
+  <details class="border rounded p-3 mb-2">
+    <summary class="fw-semibold">Windows</summary>
+    <div class="pt-2">
+      <ol>
+        <li>Download your institution's CA certificate and double-click it. <strong>Install Certificate</strong> → <strong>Current User</strong> → <strong>Place all certificates in the following store</strong> → <strong>Trusted Root Certification Authorities</strong>.</li>
+        <li>Pick <strong>eduroam</strong> from the Wi-Fi list.</li>
+        <li>Enter <code>username@your-institution-domain</code> and your password.</li>
+        <li>On the certificate prompt choose <strong>Show certificate details</strong> and confirm the name and fingerprint against the published values. The Windows dialog shows SHA-1.</li>
+      </ol>
+    </div>
+  </details>
+  <details class="border rounded p-3 mb-2">
+    <summary class="fw-semibold">macOS · iOS · iPadOS</summary>
+    <div class="pt-2">
+      <ol>
+        <li>macOS: double-click the CA certificate to add it to the <strong>login</strong> keychain in <strong>Keychain Access</strong>. Open it again, expand <strong>Trust</strong> and set <strong>When using this certificate</strong> to <strong>Always Trust</strong>.</li>
+        <li>iOS/iPadOS: download it in Safari, install the profile under <strong>Settings → General → VPN &amp; Device Management</strong>, then enable it under <strong>Settings → General → About → Certificate Trust Settings</strong>. Missing this last step leaves it untrusted.</li>
+        <li>Pick <strong>eduroam</strong> from the Wi-Fi list and enter your account.</li>
+        <li>On the certificate screen confirm the name and fingerprint, then tap <strong>Trust</strong>. macOS and iOS show SHA-256.</li>
+      </ol>
+    </div>
+  </details>
+  <details class="border rounded p-3 mb-2">
+    <summary class="fw-semibold">Android</summary>
+    <div class="pt-2">
+      <ol>
+        <li>Install the CA certificate under <strong>Settings → Security → Encryption &amp; credentials → Install a certificate → CA certificate</strong>. Menu names differ by vendor and version.</li>
+        <li>Pick <strong>eduroam</strong> from the Wi-Fi list.</li>
+        <li>Choose the EAP method and phase-2 as your institution documents, set <strong>CA certificate</strong> to the one you installed, and put the published server name in the <strong>Domain</strong> field.</li>
+        <li>Enter your account and connect. Never choose <strong>Do not validate</strong>.</li>
+      </ol>
+    </div>
+  </details>
+
+  <h2>Security policy</h2>
+  <ul>
+    <li>Accounts are for the sole use of the account holder and must not be shared or transferred.</li>
+    <li>eduroam records authentication events. Logs are kept by both your home institution and the visited one, and are used only for troubleshooting and security incident response.</li>
+    <li>Port blocking and bandwidth limits vary. The policy of the institution you are visiting applies.</li>
+    <li>Copyright infringement, unauthorised access, malware distribution and other unlawful activity result in immediate disconnection and notification of your home institution.</li>
+  </ul>
+  <p><a href="{{ '/en/policy/' | relative_url }}">eduroam Korea usage policy →</a></p>
+</div>
