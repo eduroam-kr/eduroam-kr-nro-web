@@ -1,0 +1,59 @@
+---
+layout: default
+lang: en
+title: About
+permalink: /en/about/
+description: "What eduroam is, what it gives you, and who runs it in Korea."
+---
+<div class="container wrap py-5">
+  <h1>About</h1>
+  <h2 id="what">What eduroam is</h2>
+  <p>eduroam (education roaming) lets research and education institutions open their wireless networks to each other. It started in 2003 within TERENA (now GÉANT), the association of European research networks, and now runs in more than a hundred countries. Korea started in 2012 and <strong><span data-live="count">{{ site.data.institutions.count }}</span></strong> institutions take part today.</p>
+  <p>Authentication is handled by <strong>your home institution's server, not by the site you are visiting</strong>. Your credentials never reach the visited institution, which receives only the result. You do not need a new account at every place you go, and you never hand your password to someone else's institution.</p>
+
+  <h2 id="pros">What you get</h2>
+  <div class="row g-4 mt-1 pros">
+    <div class="col-6 col-md-3">
+      <i class="fa-solid fa-earth-asia" aria-hidden="true"></i>
+      <div class="fw-semibold mt-2">Work anywhere</div>
+      <p class="small text-body-secondary mb-0">The same account works at participating institutions at home and abroad.</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <i class="fa-solid fa-lock" aria-hidden="true"></i>
+      <div class="fw-semibold mt-2">Encrypted</div>
+      <p class="small text-body-secondary mb-0">Encrypted with WPA2/WPA3 Enterprise.</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <i class="fa-solid fa-link" aria-hidden="true"></i>
+      <div class="fw-semibold mt-2">Set up once</div>
+      <p class="small text-body-secondary mb-0">Configure it once and your device connects automatically at other participating institutions.</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <i class="fa-solid fa-gift" aria-hidden="true"></i>
+      <div class="fw-semibold mt-2">Free</div>
+      <p class="small text-body-secondary mb-0">Neither users nor their home institutions are charged.</p>
+    </div>
+  </div>
+
+  <h2 id="how">How it works</h2>
+  <p>eduroam runs on IEEE 802.1X and a hierarchy of RADIUS proxy servers. The <code>@your-institution-domain</code> part of your username — the realm — decides where the request is sent.</p>
+  <p>The access point at the place you are visiting hands the request to that institution's RADIUS server, which passes it upward if the realm is not its own. Within Korea the NRO and the university Roaming Operator (RO) relay it; if the realm is not Korean it goes up to the <strong>Top Level RADIUS servers (TLR)</strong> of global eduroam. NROs do not connect to each other directly — they all connect to the TLR.</p>
+  <p>The authentication itself is done by <strong>your home institution's server</strong>. Your password travels to it inside an EAP tunnel that the servers in between cannot open; they and the visited institution see only success or failure. Whether that tunnel can be trusted is what the <a href="{{ '/en/connect/' | relative_url }}">CA certificate</a> tells you.</p>
+
+  <h2 id="who">Who runs it</h2>
+  <h3>Global eduroam</h3>
+  <p>eduroam began in 2003 within <a href="https://eduroam.org/eduroam-and-geant/" rel="noopener">TERENA (now GÉANT)</a>, the association of European research networks.</p>
+  <p>Technical and organisational standards are set by the <strong>Global eduroam Governance Committee (GeGC)</strong>, which also authorises compliant operators to provide eduroam in their countries. Its members are senior representatives of roaming operators nominated from five world regions — Africa, Asia-Pacific, Europe, Latin America, and North America — with <a href="https://eduroam.org/about/" rel="noopener">GÉANT providing the secretariat</a>.</p>
+  <p>eduroam in each country is run by its <strong>National Roaming Operator (NRO)</strong>. An NRO is usually that country's research network — <a href="https://internet2.edu/community/about-us/" rel="noopener">Internet2</a> in the United States, <a href="https://www.aarnet.edu.au/eduroam" rel="noopener">AARNet</a> in Australia, KREONET in Korea.</p>
+
+  <h3>KREONET</h3>
+  <p><a href="https://www.kreonet.net">KREONET</a>, the national research network operated by the Korea Institute of Science and Technology Information (KISTI), has served research institutions since 1989, when it provided the first nationwide TCP/IP service in Korea. Under a 2012 agreement with global eduroam it acts as the <strong>National Roaming Operator (NRO)</strong> for Korea.</p>
+
+  <h3>KREN</h3>
+  <p>Membership and roaming for universities in Korea are handled by the <strong>university Roaming Operator (RO)</strong>. Since November 2024 that is <a href="https://www.eduroam.kr" rel="noopener">KREN</a>.</p>
+
+  <h3>Participating institutions</h3>
+  <p>eduroam is run on what its members contribute. Each institution opens its own Wi-Fi and authenticates its own users. That is what makes it work for visiting researchers and exchange students.</p>
+
+  <p class="mt-4"><a href="{{ '/en/join/' | relative_url }}">How to join →</a> · <a href="{{ '/en/connect/' | relative_url }}">How to connect →</a></p>
+</div>

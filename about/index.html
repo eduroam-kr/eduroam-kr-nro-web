@@ -1,0 +1,59 @@
+---
+layout: default
+lang: ko
+title: 소개
+permalink: /about/
+description: "에듀롬(eduroam)이 무엇인지, 무엇이 좋은지, 누가 함께 운영하는지 안내합니다."
+---
+<div class="container wrap py-5">
+  <h1>소개</h1>
+  <h2 id="what">에듀롬이란</h2>
+  <p>에듀롬(eduroam, education roaming)은 전 세계 연구·교육기관이 무선랜을 서로 열어 주는 인증 로밍 서비스입니다. 2003년 유럽 연구망 연합 TERENA(현 GÉANT)에서 시작해 지금은 100개가 넘는 나라가 참여합니다. 대한민국은 2012년 서비스를 시작했고, 현재 <strong><span data-live="count">{{ site.data.institutions.count }}</span>곳</strong>의 기관이 참여합니다.</p>
+  <p>인증은 <strong>방문한 기관이 아니라 소속 기관의 서버</strong>가 처리합니다. 아이디와 비밀번호가 방문 기관에 전달되지 않고, 방문 기관은 인증 결과만 받습니다. 그래서 방문한 곳에서 계정을 새로 만들 필요가 없고, 비밀번호를 남의 기관에 맡길 일도 없습니다.</p>
+
+  <h2 id="pros">무엇이 좋은가</h2>
+  <div class="row g-4 mt-1 pros">
+    <div class="col-6 col-md-3">
+      <i class="fa-solid fa-earth-asia" aria-hidden="true"></i>
+      <div class="fw-semibold mt-2">경계 없는 연구·교육</div>
+      <p class="small text-body-secondary mb-0">국내외 참여기관 어디서나 같은 계정으로 접속합니다.</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <i class="fa-solid fa-lock" aria-hidden="true"></i>
+      <div class="fw-semibold mt-2">안전한 네트워크</div>
+      <p class="small text-body-secondary mb-0">WPA2·WPA3 엔터프라이즈로 암호화합니다.</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <i class="fa-solid fa-link" aria-hidden="true"></i>
+      <div class="fw-semibold mt-2">끊김 없는 연결</div>
+      <p class="small text-body-secondary mb-0">한 번 설정하면 다른 참여기관에서도 자동으로 연결됩니다.</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <i class="fa-solid fa-gift" aria-hidden="true"></i>
+      <div class="fw-semibold mt-2">무료</div>
+      <p class="small text-body-secondary mb-0">이용자에게도, 이용자의 소속 기관에도 요금을 부과하지 않습니다.</p>
+    </div>
+  </div>
+
+  <h2 id="how">어떻게 연동되는가</h2>
+  <p>에듀롬은 IEEE 802.1X 와 RADIUS 프록시 계층 위에서 돌아갑니다. 아이디 뒤에 붙는 <code>@소속기관도메인</code>(realm)이 인증 요청을 어디로 보낼지 정합니다.</p>
+  <p>방문한 기관의 접속점이 요청을 받으면 그 기관 RADIUS 서버로 넘기고, realm 이 자기 것이 아니면 위로 올려 보냅니다. 국내에서는 NRO 와 대학 로밍 운영기관(RO)이 중계하고, 국내 realm 이 아니면 글로벌 에듀롬의 <strong>최상위 RADIUS 서버(TLR, Top Level RADIUS)</strong>로 올라갑니다. 각 NRO 는 서로 직접 연결하지 않고 이 TLR 에 붙습니다.</p>
+  <p>인증 자체는 <strong>소속 기관의 서버</strong>가 합니다. 비밀번호는 중간 서버들이 열어 볼 수 없는 EAP 터널 안에서 소속 기관까지 전달되고, 중간 서버와 방문 기관은 성공·실패 결과만 받습니다. 터널을 믿을 수 있는지는 <a href="{{ '/connect/' | relative_url }}">CA 인증서</a>로 확인합니다.</p>
+
+  <h2 id="who">누가 운영하는가</h2>
+  <h3>글로벌 에듀롬</h3>
+  <p>에듀롬은 2003년 유럽 연구망 연합 <a href="https://eduroam.org/eduroam-and-geant/" rel="noopener">TERENA(현 GÉANT)</a>에서 시작했습니다.</p>
+  <p>기술과 운영 기준은 <strong>글로벌 에듀롬 운영위원회(GeGC)</strong>가 정하고, 기준을 지키는 운영기관에 각 나라의 에듀롬 운영을 인가합니다. GeGC 는 아프리카·아시아태평양·유럽·라틴아메리카·북미 다섯 권역에서 뽑힌 로밍 운영기관 대표들로 이루어지고, <a href="https://eduroam.org/about/" rel="noopener">GÉANT 가 사무국</a>을 맡습니다.</p>
+  <p>각 국가의 에듀롬 운영은 <strong>국가 로밍 운영기관(NRO)</strong>이 맡습니다. NRO 는 대개 그 나라의 연구망입니다 — 미국은 <a href="https://internet2.edu/community/about-us/" rel="noopener">Internet2</a>, 호주는 <a href="https://www.aarnet.edu.au/eduroam" rel="noopener">AARNet</a>, 대한민국은 KREONET 입니다.</p>
+
+  <h3>국가과학기술연구망(KREONET)</h3>
+  <p><a href="https://www.kisti.re.kr">한국과학기술정보연구원(KISTI)</a>의 <a href="https://www.kreonet.net">국가과학기술연구망(KREONET)</a>은 1989년 국내 최초로 전국 규모 인터넷(TCP/IP) 서비스를 제공한 이래, 산·학·연 연구기관에 초고성능 네트워크를 제공해 왔습니다. 2012년 글로벌 에듀롬과 협약을 맺고 대한민국을 대표하는 <strong>국가 로밍 운영기관(NRO)</strong>을 맡고 있습니다.</p>
+
+  <h3>대학 로밍 운영기관(KREN)</h3>
+  <p>대한민국 내 대학의 에듀롬 가입과 로밍은 <strong>대학 로밍 운영기관(RO)</strong>이 맡습니다. 2024년 11월부터 <a href="https://www.eduroam.kr" rel="noopener">한국교육정보화재단(KREN)</a>이 운영합니다.</p>
+
+  <h3>참여기관</h3>
+  <p>에듀롬은 참여기관의 자발적인 기여로 운영됩니다. 각 기관이 자기 Wi-Fi 를 열고 자기 이용자를 인증합니다. 방문 연구원과 교환학생처럼 기관을 옮겨 다니는 사람에게 실질적인 도움이 됩니다.</p>
+
+  <p class="mt-4"><a href="{{ '/join/' | relative_url }}">기관 가입 안내 →</a> · <a href="{{ '/connect/' | relative_url }}">접속 방법 →</a></p>
+</div>
