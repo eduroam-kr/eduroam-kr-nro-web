@@ -1,0 +1,50 @@
+---
+layout: default
+lang: en
+notice_js: true
+permalink: /en/
+description: "eduroam lets you use Wi-Fi at participating institutions worldwide with your home institution account. KREONET is the National Roaming Operator for Korea."
+---
+{%- assign latest = site.notices | sort: 'date' | reverse | first -%}
+{%- assign db = site.data.institutions -%}
+
+<div class="container wrap py-5">
+
+  {%- if latest %}
+  <div class="alert alert-primary d-flex flex-wrap gap-2 align-items-baseline mt-4" role="alert"
+       data-notice-fresh="{{ site.notice_fresh_days }}" data-notice-date="{{ latest.date | date: '%Y-%m-%d' }}">
+    <span class="badge text-bg-primary">Notice</span>
+    <a class="alert-link" href="{{ latest.url | relative_url }}">{{ latest.title_en | default: latest.title_ko }}</a>
+    <span class="ms-auto small text-body-secondary">{{ latest.date | date: '%Y-%m-%d' }}</span>
+  </div>
+  {%- endif %}
+
+  <div class="hero my-4" style="background-image: url('{{ '/assets/bg.jpg' | relative_url }}')">
+    <div class="p-4">
+      <p class="hero-eyebrow">For research and education</p>
+      <h1 class="hero-title">Global Wi-Fi roaming,<br>eduroam</h1>
+      <p class="hero-sub">One account, free Wi-Fi at research and<br class="d-sm-none"> education institutions worldwide</p>
+    </div>
+  </div>
+
+  <p>One account from your home institution connects you at participating sites worldwide. No guest account to apply for at each visit.</p>
+  <p>eduroam in the Republic of Korea is operated by <strong>KREONET</strong>, the national research network of KISTI, as the National Roaming Operator (NRO).</p>
+
+  <h2 id="status">Korea at a glance</h2>
+  <div class="row g-3 mt-1">
+    <div class="col-6 col-md-4"><div class="border rounded p-3 h-100">
+      <div class="h3 mb-0" data-live="count">{{ db.count }}</div><div class="small text-body-secondary">institutions</div></div></div>
+    <div class="col-6 col-md-4"><div class="border rounded p-3 h-100">
+      <div class="h3 mb-0" data-live="locations">{{ site.data.institutions.locations }}</div><div class="small text-body-secondary">campuses and branches</div></div></div>
+  </div>
+  <p class="mt-3"><a href="{{ '/en/map/' | relative_url }}">See the eduroam service map →</a></p>
+
+  <h2 id="connect">How to connect</h2>
+  <ol>
+    <li>Check that your home institution participates. The <a href="{{ '/en/map/' | relative_url }}">list of institutions</a> shows every one in Korea.</li>
+    <li>Choose <code>eduroam</code> from the Wi-Fi list.</li>
+    <li>Enter your home institution account as <code>username@institution-domain</code>.</li>
+  </ol>
+  <p><a href="{{ '/en/connect/' | relative_url }}">Per-device setup and what to check →</a></p>
+
+</div>
