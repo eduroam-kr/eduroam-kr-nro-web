@@ -1,0 +1,24 @@
+---
+layout: default
+lang: en
+title: Notices
+permalink: /en/notices/
+description: "Operational notices for eduroam in Korea: maintenance, policy changes and newly joined institutions."
+---
+<div class="container wrap py-5">
+  <h1>Notices</h1>
+  <p class="text-body-secondary">Maintenance, policy changes and newly joined institutions.</p>
+  {%- assign ns = site.notices | sort: 'date' | reverse %}
+  {%- if ns.size == 0 %}
+  <p class="mt-4">No notices yet.</p>
+  {%- else %}
+  <ul class="list-unstyled mt-4">
+    {%- for n in ns %}
+    <li class="border-bottom py-3 d-flex flex-wrap gap-2 align-items-baseline">
+      <a href="{{ n.url | relative_url }}">{{ n.title_en | default: n.title_ko }}</a>
+      <span class="ms-auto small text-body-secondary">{{ n.date | date: '%Y-%m-%d' }}</span>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</div>

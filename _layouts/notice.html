@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<div class="container wrap py-5">
+  {%- comment -%}
+    본문이 한국어 하나뿐이라 영문 목록 링크를 여기 또 두지 않는다. 영문 목록에서
+    들어온 사람은 navbar 의 언어 링크로 돌아간다 — 그쪽이 /en/notices/ 를 가리킨다.
+  {%- endcomment -%}
+  <p class="mb-2"><a href="{{ '/notices/' | relative_url }}">← 공지 목록</a></p>
+  <h1 class="mb-1">{{ page.title_ko }}</h1>
+  <p class="small text-body-secondary"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y-%m-%d' }}</time></p>
+  <div class="notice-body mt-4">{{ content }}</div>
+</div>

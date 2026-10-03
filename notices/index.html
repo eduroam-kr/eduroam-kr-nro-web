@@ -1,0 +1,24 @@
+---
+layout: default
+lang: ko
+title: 공지
+permalink: /notices/
+description: "대한민국 eduroam 운영 공지. 서버 점검, 정책 변경, 신규 가입 기관 소식을 올립니다."
+---
+<div class="container wrap py-5">
+  <h1>공지</h1>
+  <p class="text-body-secondary">서버 점검, 정책 변경, 신규 가입 기관 소식을 올립니다.</p>
+  {%- assign ns = site.notices | sort: 'date' | reverse %}
+  {%- if ns.size == 0 %}
+  <p class="mt-4">아직 공지가 없습니다.</p>
+  {%- else %}
+  <ul class="list-unstyled mt-4">
+    {%- for n in ns %}
+    <li class="border-bottom py-3 d-flex flex-wrap gap-2 align-items-baseline">
+      <a href="{{ n.url | relative_url }}">{{ n.title_ko }}</a>
+      <span class="ms-auto small text-body-secondary">{{ n.date | date: '%Y-%m-%d' }}</span>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</div>
