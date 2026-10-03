@@ -1,0 +1,57 @@
+---
+layout: default
+lang: ko
+title: 서비스 지역
+permalink: /map/
+map: true
+description: "대한민국 eduroam 참여기관과 캠퍼스·분원 위치를 지도와 목록에서 확인합니다. 기관명이나 realm 으로 검색됩니다."
+---
+<div class="container wrap py-5">
+  <h1>서비스 지역</h1>
+  <p>대한민국 eduroam 참여기관 <strong><span data-live="count">{{ site.data.institutions.count }}</span>곳</strong>, 캠퍼스·분원 <strong><span data-live="locations">{{ site.data.institutions.locations }}</span>곳</strong>입니다.
+     기관 안 모든 건물에서 되는 것은 아닙니다. 자세한 설치 현황은 각 기관 안내 페이지에서 확인하세요.</p>
+
+  <div id="map" class="my-4"></div>
+
+  <h2 id="list">참여기관</h2>
+  <div class="my-3">
+    <input type="search" class="form-control" id="q" placeholder="기관명 또는 realm 검색" aria-label="기관 검색">
+  </div>
+  <div class="inst inst-legend small text-body-secondary" aria-label="목록 보는 법">
+    <span class="inst-logo-slot">로고</span>
+    <div class="inst-main">
+      <div class="inst-name">기관명</div>
+      <div>캠퍼스·분원</div>
+      <div class="inst-realms"><code>realm</code> — 아이디 뒤에 붙이는 도메인</div>
+    </div>
+    <div class="inst-side">
+      <span class="d-none d-md-inline">참여 연도</span>
+      <span class="inst-guide">안내</span>
+    </div>
+  </div>
+  <div class="list-group" id="tb">
+  {%- for i in site.data.institutions.institutions %}
+    <div class="list-group-item inst" data-k="{{ i.name.ko }} {{ i.name.en }} {{ i.realms | join: ' ' }}">
+      {%- comment -%} 첫 쪽에 보일 10곳만 바로 받는다. 나머지는 list.js 가 그 쪽을 펼칠 때
+         src 를 채운다 — 120곳을 한꺼번에 받으면 로고만 1.7MB 다. {%- endcomment -%}
+      <img class="inst-logo" {% if forloop.index <= 10 %}src{% else %}data-src{% endif %}="{{ site.db_url }}/logo/{{ i.logo }}" alt="" loading="lazy">
+      <div class="inst-main">
+        <div class="inst-name">{{ i.name.ko }}</div>
+        {%- if i.campus.size > 1 %}<div class="small text-body-secondary">{{ i.campus | join: ' · ' }}</div>{% endif %}
+        <div class="inst-realms">{% for r in i.realms %}<code>{{ r }}</code>{% endfor %}</div>
+      </div>
+      <div class="inst-side">
+        {%- if i.year_joined %}<span class="d-none d-md-inline text-body-secondary">{{ i.year_joined }}</span>{% endif %}
+        <span class="inst-guide">{% if i.info_url %}<a href="{{ i.info_url }}" rel="noopener">안내</a>{% endif %}</span>
+      </div>
+    </div>
+  {%- endfor %}
+  </div>
+  <p class="small text-body-secondary mt-3" id="hit"></p>
+  <nav aria-label="기관 목록 쪽 이동"><ul class="pagination pagination-sm flex-wrap" id="pager"></ul></nav>
+</div>
+
+<script>
+  var GEO = {{ site.data.locations | jsonify }};
+  var DB = "{{ site.db_url }}";
+</script>

@@ -1,0 +1,57 @@
+---
+layout: default
+lang: en
+title: Coverage
+permalink: /en/map/
+map: true
+description: "Map and list of eduroam participating institutions in Korea, searchable by name or realm."
+---
+<div class="container wrap py-5">
+  <h1>Coverage</h1>
+  <p><strong><span data-live="count">{{ site.data.institutions.count }}</span></strong> participating institutions in Korea across <strong><span data-live="locations">{{ site.data.institutions.locations }}</span></strong> campuses and sites.
+     Coverage is not building-wide everywhere — check each institution's own page for details.</p>
+
+  <div id="map" class="my-4"></div>
+
+  <h2 id="list">Participating institutions</h2>
+  <div class="my-3">
+    <input type="search" class="form-control" id="q" placeholder="Search by name or realm" aria-label="Search institutions">
+  </div>
+  <div class="inst inst-legend small text-body-secondary" aria-label="How to read this list">
+    <span class="inst-logo-slot">Logo</span>
+    <div class="inst-main">
+      <div class="inst-name">Institution</div>
+      <div>Campus / branch</div>
+      <div class="inst-realms"><code>realm</code> — the domain after your username</div>
+    </div>
+    <div class="inst-side">
+      <span class="d-none d-md-inline">Joined</span>
+      <span class="inst-guide">Guide</span>
+    </div>
+  </div>
+  <div class="list-group" id="tb">
+  {%- for i in site.data.institutions.institutions %}
+    <div class="list-group-item inst" data-k="{{ i.name.ko }} {{ i.name.en }} {{ i.realms | join: ' ' }}">
+      {%- comment -%} 첫 쪽에 보일 10곳만 바로 받는다. 나머지는 list.js 가 그 쪽을 펼칠 때
+         src 를 채운다 — 120곳을 한꺼번에 받으면 로고만 1.7MB 다. {%- endcomment -%}
+      <img class="inst-logo" {% if forloop.index <= 10 %}src{% else %}data-src{% endif %}="{{ site.db_url }}/logo/{{ i.logo }}" alt="" loading="lazy">
+      <div class="inst-main">
+        <div class="inst-name">{{ i.name.en | default: i.name.ko }}</div>
+        {%- if i.campus.size > 1 %}<div class="small text-body-secondary">{{ i.campus | join: ' · ' }}</div>{% endif %}
+        <div class="inst-realms">{% for r in i.realms %}<code>{{ r }}</code>{% endfor %}</div>
+      </div>
+      <div class="inst-side">
+        {%- if i.year_joined %}<span class="d-none d-md-inline text-body-secondary">{{ i.year_joined }}</span>{% endif %}
+        <span class="inst-guide">{% if i.info_url %}<a href="{{ i.info_url }}" rel="noopener">Guide</a>{% endif %}</span>
+      </div>
+    </div>
+  {%- endfor %}
+  </div>
+  <p class="small text-body-secondary mt-3" id="hit"></p>
+  <nav aria-label="Institution list pages"><ul class="pagination pagination-sm flex-wrap" id="pager"></ul></nav>
+</div>
+
+<script>
+  var GEO = {{ site.data.locations | jsonify }};
+  var DB = "{{ site.db_url }}";
+</script>
