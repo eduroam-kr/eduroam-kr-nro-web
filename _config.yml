@@ -7,6 +7,11 @@ remote_theme: eduroam-kr/multipage-jekyll-site-theme@v1.12
 brand: Korea
 bilingual: true
 
+# 틀 너비는 테마 기본값을 쓴다 — 본문 56rem(896px), 목차를 낀 틀 72rem.
+# 단위 rem 은 브라우저 기본 글자 크기의 배수로, 보통 1rem = 16px 이다. 글자를
+# 키우면 틀도 같이 커지라고 px 대신 쓴다. 바꾸려면 doc, wrap, wrap_wide, frame
+# 을 여기에 적는다 (뜻은 eduroam-kr-wiki 의 _config.yml 주석에 적어 두었다).
+
 url: "https://eduroam.kreonet.net"
 baseurl: ""
 
