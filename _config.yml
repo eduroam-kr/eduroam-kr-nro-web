@@ -3,7 +3,7 @@ title_en: eduroam Korea
 description: 대한민국 eduroam 국가 로밍 운영기관(NRO) 안내
 description_en: National Roaming Operator for eduroam in the Republic of Korea
 
-remote_theme: eduroam-kr/multipage-jekyll-site-theme@v1.5
+remote_theme: eduroam-kr/multipage-jekyll-site-theme@v1.6
 brand: Korea
 bilingual: true
 
