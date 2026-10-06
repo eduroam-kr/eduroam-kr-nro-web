@@ -8,8 +8,8 @@ description: "에듀롬(eduroam)이 무엇인지, 무엇이 좋은지, 누가 �
 <div class="container wrap py-5">
   <h1>소개</h1>
   <h2 id="what">에듀롬이란</h2>
-  <p>에듀롬(eduroam, education roaming)은 전 세계 연구·교육기관이 무선랜을 서로 열어 주는 인증 로밍 서비스로, 2003년 유럽 연구망 연합 TERENA(현 GÉANT)에서 시작해 지금은 100개가 넘는 나라가 참여합니다. 대한민국은 2012년 서비스를 시작했고 현재 <strong><span data-live="count">{{ site.data.institutions.count }}</span>곳</strong>의 기관이 참여합니다.</p>
-  <p>인증은 <strong>방문한 기관이 아니라 소속 기관의 서버</strong>가 처리합니다. 아이디와 비밀번호가 방문 기관에 전달되지 않고 방문 기관은 인증 결과만 받기 때문에, 방문한 곳에서 계정을 새로 만들 필요가 없고 비밀번호를 남의 기관에 맡길 일도 없습니다.</p>
+  <p>에듀롬(eduroam, education roaming)은 전 세계 연구·교육기관이 무선랜을 서로 열어 주는 인증 로밍 서비스로, 2003년 유럽 연구망 연합 TERENA(현 GÉANT)에서 시작해 지금은 100개가 넘는 나라가 참여합니다. 대한민국은 2012년 서비스를 시작했고, 현재 <strong><span data-live="count">{{ site.data.institutions.count }}</span>곳</strong>의 기관이 참여합니다.</p>
+  <p>인증은 <strong>방문한 기관이 아니라 소속 기관의 서버</strong>가 처리합니다. 아이디와 비밀번호가 방문 기관에 전달되지 않고, 방문 기관은 인증 결과만 받습니다. 그래서 방문한 곳에서 계정을 새로 만들 필요가 없고, 비밀번호를 남의 기관에 맡길 일도 없습니다.</p>
 
   <h2 id="pros">무엇이 좋은가</h2>
   <div class="row g-4 mt-1 pros">
@@ -37,13 +37,13 @@ description: "에듀롬(eduroam)이 무엇인지, 무엇이 좋은지, 누가 �
 
   <h2 id="how">어떻게 연동되는가</h2>
   <p>에듀롬은 IEEE 802.1X 와 RADIUS 프록시 계층 위에서 돌아갑니다. 아이디 뒤에 붙는 <code>@소속기관도메인</code>(realm)이 인증 요청을 어디로 보낼지 정합니다.</p>
-  <p>방문한 기관의 접속점이 요청을 받으면 그 기관 RADIUS 서버로 넘기고 realm 이 자기 것이 아니면 위로 올려 보냅니다. 국내에서는 NRO 와 대학 로밍 운영기관(RO)이 중계하고 국내 realm 이 아니면 글로벌 에듀롬의 <strong>최상위 RADIUS 서버(TLR, Top Level RADIUS)</strong>로 올라갑니다. 각 NRO 는 서로 직접 연결하지 않고 이 TLR 에 붙습니다.</p>
-  <p>인증 자체는 <strong>소속 기관의 서버</strong>가 합니다. 비밀번호는 중간 서버들이 열어 볼 수 없는 EAP 터널 안에서 소속 기관까지 전달되고 중간 서버와 방문 기관은 성공·실패 결과만 받습니다. 터널을 믿을 수 있는지는 <a href="{{ '/connect/' | relative_url }}">CA 인증서</a>로 확인합니다.</p>
+  <p>방문한 기관의 접속점이 요청을 받으면 그 기관 RADIUS 서버로 넘기고, realm 이 자기 것이 아니면 위로 올려 보냅니다. 국내에서는 NRO 와 대학 로밍 운영기관(RO)이 중계하고, 국내 realm 이 아니면 글로벌 에듀롬의 <strong>최상위 RADIUS 서버(TLR, Top Level RADIUS)</strong>로 올라갑니다. 각 NRO 는 서로 직접 연결하지 않고 이 TLR 에 붙습니다.</p>
+  <p>인증 자체는 <strong>소속 기관의 서버</strong>가 합니다. 비밀번호는 중간 서버들이 열어 볼 수 없는 EAP 터널 안에서 소속 기관까지 전달되고, 중간 서버와 방문 기관은 성공·실패 결과만 받습니다. 터널을 믿을 수 있는지는 <a href="{{ '/connect/' | relative_url }}">CA 인증서</a>로 확인합니다.</p>
 
   <h2 id="who">누가 운영하는가</h2>
   <h3>글로벌 에듀롬</h3>
   <p>에듀롬은 2003년 유럽 연구망 연합 <a href="https://eduroam.org/eduroam-and-geant/" rel="noopener">TERENA(현 GÉANT)</a>에서 시작했습니다.</p>
-  <p>기술과 운영 기준은 <strong>글로벌 에듀롬 운영위원회(GeGC)</strong>가 정하고 기준을 지키는 운영기관에 각 나라의 에듀롬 운영을 인가합니다. GeGC 는 아프리카·아시아태평양·유럽·라틴아메리카·북미 다섯 권역에서 뽑힌 로밍 운영기관 대표들로 이루어지고 <a href="https://eduroam.org/about/" rel="noopener">GÉANT 가 사무국</a>을 맡습니다.</p>
+  <p>기술과 운영 기준은 <strong>글로벌 에듀롬 운영위원회(GeGC)</strong>가 정하고, 기준을 지키는 운영기관에 각 나라의 에듀롬 운영을 인가합니다. GeGC 는 아프리카·아시아태평양·유럽·라틴아메리카·북미 다섯 권역에서 뽑힌 로밍 운영기관 대표들로 이루어지고, <a href="https://eduroam.org/about/" rel="noopener">GÉANT 가 사무국</a>을 맡습니다.</p>
   <p>각 국가의 에듀롬 운영은 <strong>국가 로밍 운영기관(NRO)</strong>이 맡습니다. NRO 는 대개 그 나라의 연구망입니다 — 미국은 <a href="https://internet2.edu/community/about-us/" rel="noopener">Internet2</a>, 호주는 <a href="https://www.aarnet.edu.au/eduroam" rel="noopener">AARNet</a>, 대한민국은 KREONET 입니다.</p>
 
   <h3>국가과학기술연구망(KREONET)</h3>

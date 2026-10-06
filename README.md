@@ -4,7 +4,7 @@
 
 ## 기관 데이터
 
-기관 데이터는 여기 없습니다. 정본은 [eduroam-kr-db](https://github.com/eduroam-kr/eduroam-kr-db) 이고 화면은 브라우저가 `db.eduroam.kreonet.net` 에서 직접 받아 그립니다.
+기관 데이터는 여기 없습니다. 정본은 [eduroam-kr-db](https://github.com/eduroam-kr/eduroam-kr-db) 이고, 화면은 브라우저가 `db.eduroam.kreonet.net` 에서 직접 받아 그립니다.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ eduroam-kr-db 에 병합되면 몇 분 뒤 새로고침만으로 반영됩니다
 
 빌드할 때 `_data/` 로 받아 두는 값은 예비용입니다. JS 가 꺼져 있거나 크롤러가 볼 때, db 가 죽었을 때 이 값이 화면에 남습니다. 받은 쪽의 `built` 가 더 새로울 때만 덮어씁니다.
 
-예비용 값까지 최신으로 맞추려면 Actions 에서 손으로 돌리거나 db 저장소에서 `repository_dispatch` 로 `db-updated` 를 보냅니다.
+예비용 값까지 최신으로 맞추려면 Actions 에서 손으로 돌리거나, db 저장소에서 `repository_dispatch` 로 `db-updated` 를 보냅니다.
 
 기관 정보를 고치려면 이 저장소가 아니라 **eduroam-kr-db 에 Pull Request** 를 보내세요.
 
@@ -58,6 +58,6 @@ date: 2026-10-01
 본문은 한국어로 씁니다.
 ```
 
-영문 목록에는 영문 제목이 나오고 눌러 들어가면 같은 글로 연결됩니다. 공지는 운영 안내라 본문까지 번역하지 않습니다.
+영문 목록에는 영문 제목이 나오고, 눌러 들어가면 같은 글로 연결됩니다. 공지는 운영 안내라 본문까지 번역하지 않습니다.
 
-홈 화면의 공지 블록은 90일이 지나면 화면에서 사라집니다 (`_config.yml` 의 `notice_fresh_days`). 오래된 공지가 첫 화면에 남아 있으면 방치된 사이트로 보입니다. HTML 에는 그대로 있어 페이지 소스와 크롤러에서는 보이고 상단 메뉴의 공지 링크도 그대로입니다.
+홈 화면의 공지 블록은 90일이 지나면 화면에서 사라집니다 (`_config.yml` 의 `notice_fresh_days`). 오래된 공지가 첫 화면에 남아 있으면 방치된 사이트로 보입니다. HTML 에는 그대로 있어 페이지 소스와 크롤러에서는 보이고, 상단 메뉴의 공지 링크도 그대로입니다.
