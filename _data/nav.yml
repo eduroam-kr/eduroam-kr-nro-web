@@ -10,6 +10,15 @@
   icon: fa-map-location-dot
   title: 서비스 지역
   title_en: Coverage
+  # 부모가 구역 index 가 아니라 지도 쪽 자체라서 "전체" 줄을 끈다.
+  children_home: false
+  children:
+    - url: /map/
+      title: 지도로 보기
+      title_en: Map
+    - url: /institutions/
+      title: 참여기관 목록
+      title_en: Institutions
 - url: /join/
   icon: fa-building-columns
   title: 기관 가입
