@@ -1,0 +1,76 @@
+---
+layout: default
+lang: en
+title: Troubleshooting
+permalink: /en/connect/help/
+description: "What to check when eduroam suddenly stops working, fixes by symptom, handling certificate warnings, and how to ask for help."
+---
+<div class="container wrap py-5">
+  <h1>Troubleshooting</h1>
+  <p>If eduroam worked yesterday and fails today, the usual causes are a changed password, a changed server certificate, or an OS update that tightened the settings. Work through the checks below, and if nothing helps, contact support with the details listed at the end.</p>
+
+  <h2>Check first</h2>
+  <ol>
+    <li>Does it work elsewhere? If it works on your home campus but not at the site you are visiting, the visited site's wireless network may be the problem.</li>
+    <li>Does the same account work on another device? If no device works, suspect the account. If other devices work, suspect this device's settings.</li>
+    <li>Did you recently change your home institution password? The saved eduroam profile still uses the old one.</li>
+    <li>Did you recently update the OS? Updates sometimes change what certificate settings are required.</li>
+  </ol>
+
+  <h2>Fixes by symptom</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle">
+      <thead><tr><th scope="col">Symptom</th><th scope="col">Try</th></tr></thead>
+      <tbody>
+        <tr><td>eduroam is not in the list</td><td>Check that the place is in the coverage area. Move and look again</td></tr>
+        <tr><td>Keeps asking for the password</td><td>Forget the saved eduroam network and set it up again with the new password</td></tr>
+        <tr><td>Certificate warning</td><td>Do not tap Trust right away. Follow “Certificate warnings” below</td></tr>
+        <tr><td>After an update, asks you to pick a CA certificate</td><td>Set the CA certificate and domain your home institution publishes</td></tr>
+        <tr><td>Connected but no internet</td><td>A problem with the visited site's network. Tell its IT desk the place and time</td></tr>
+        <tr><td>Drops often</td><td>Only in one place: that site's network. Everywhere: check the device settings</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Certificate warnings</h2>
+  <p>Institutions replace their authentication server certificate from time to time. A device that was set up by just tapping Trust, without a CA certificate, treats the new certificate as an unknown server and warns or refuses to connect. The same warning also appears when someone runs a rogue access point named eduroam.</p>
+  <ol>
+    <li>Do not enter your password while the warning is shown.</li>
+    <li>Look for a certificate change notice on your home institution's website or eduroam page.</li>
+    <li>If there is one, forget the saved eduroam network and set it up again with the CA certificate and domain your institution publishes. With these set, the next certificate change will not trigger a warning.</li>
+    <li>If there is no notice, do not connect at that place, and report it to your home institution.</li>
+  </ol>
+
+  <h2>Values to check when setting up again</h2>
+  <p>Step-by-step screens per OS are on <a href="{{ '/en/connect/' | relative_url }}">Connecting</a>.</p>
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle table-kv">
+      <tbody>
+        <tr><th scope="row">Username</th><td>The full <code>username@your-institution-domain</code>, e.g. <code>hong@example.ac.kr</code></td></tr>
+        <tr><th scope="row">Anonymous identity</th><td><code>anonymous@your-institution-domain</code>, or leave empty if unsure. The domain must match the username</td></tr>
+        <tr><th scope="row">CA certificate and domain</th><td>As your home institution publishes</td></tr>
+        <tr><th scope="row">Password</th><td>Your home institution eduroam password (some institutions use one separate from the portal)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>If you also hold an account at an institution abroad, keep the username and anonymous identity on the same domain. Mixing them fails the login and sends your password to the other institution's server.</p>
+
+  <h2>Getting help</h2>
+  <p>Ask your home institution about your account, password and certificate settings. Ask the site you are visiting about its signal or internet access. You can find your institution's eduroam contact in the <a href="{{ '/en/institutions/' | relative_url }}">institution list</a>.</p>
+  <p>These details speed things up. <strong>Never give your password to anyone.</strong></p>
+  <ul>
+    <li>Username (e.g. <code>hong@example.ac.kr</code>)</li>
+    <li>Where (institution, building) and when</li>
+    <li>Device type and OS version</li>
+    <li>The message on screen (a screenshot if possible)</li>
+    <li>The MAC address shown in the eduroam network details</li>
+  </ul>
+
+  <h2>Further reading</h2>
+  <p>On the eduroam KR wiki (in Korean):</p>
+  <ul>
+    <li><a href="https://wiki.eduroam.kreonet.net/tech/client-validation/">Server validation settings per OS</a></li>
+    <li><a href="https://wiki.eduroam.kreonet.net/tech/identity-and-realm/">Anonymous identity and realm</a></li>
+    <li><a href="https://wiki.eduroam.kreonet.net/tech/troubleshooting/">Troubleshooting for institution staff</a></li>
+  </ul>
+</div>

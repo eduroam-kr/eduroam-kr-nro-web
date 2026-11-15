@@ -3,7 +3,7 @@ layout: default
 lang: ko
 title: 접속 방법
 permalink: /connect/
-description: "eduroam 접속에 필요한 설정값과 Windows·macOS·iOS·Android 설정 방법. CA 인증서 확인 방법과 유의사항을 함께 안내합니다."
+description: "eduroam 접속에 필요한 설정값과 Windows·macOS·iOS·Android·Linux 설정 방법. CA 인증서 확인 방법과 유의사항을 함께 안내합니다."
 ---
 <div class="container wrap py-5">
   <h1>접속 방법</h1>
@@ -40,8 +40,11 @@ description: "eduroam 접속에 필요한 설정값과 Windows·macOS·iOS·Andr
     <strong>CA 인증서를 설치하지 않거나 인증서 지문을 확인하지 않고 접속하지 마십시오.</strong>
     확인을 건너뛰면 <strong>eduroam</strong>이라는 같은 이름으로 위장한 가짜 접속점에 연결될 수 있고,
     그 경우 입력한 아이디와 비밀번호가 공격자에게 그대로 넘어갑니다.
+    「검증 안 함」, 「CA 인증서 필요 없음」을 고르거나, 처음 사용 시 신뢰(TOFU)로 표시된 인증서를 기관 안내와 대조하지 않고 「신뢰」를 누르는 것도 같습니다.
+    이렇게 확인 없이 접속하는 것에 대한 책임은 이용자 본인에게 있습니다.
   </div>
   <p>인증서 파일과 지문 값은 <strong>소속 기관</strong>이 공개합니다. 방문한 기관 것이 아니라 소속 기관 것을 사용하세요.</p>
+  <p>처음 설정은 가능하면 소속 기관 안에서 합니다. 학회장, 공항, 카페처럼 사람이 많은 곳에는 가짜 접속점이 있을 수 있습니다.</p>
 
   <h3>OS별 설정 방법</h3>
   <details class="border rounded p-3 mb-2">
@@ -77,6 +80,26 @@ description: "eduroam 접속에 필요한 설정값과 Windows·macOS·iOS·Andr
       </ol>
     </div>
   </details>
+  <details class="border rounded p-3 mb-2">
+    <summary class="fw-semibold">Linux (GNOME · KDE)</summary>
+    <div class="pt-2">
+      <ol>
+        <li>Wi-Fi 목록에서 <strong>eduroam</strong>을 고릅니다.</li>
+        <li>보안은 <strong>WPA 및 WPA2 엔터프라이즈</strong>(또는 WPA3 엔터프라이즈)를 고릅니다.</li>
+        <li>인증 방식, 익명 아이디, 도메인, 내부 인증 방식을 기관 안내대로 넣습니다.</li>
+        <li><strong>CA 인증서</strong>에 소속 기관이 공개한 인증서 파일을 지정하고, 계정을 입력합니다.</li>
+        <li><strong>CA 인증서 필요 없음</strong>은 체크하지 마세요. 켜면 단말이 서버를 전혀 확인하지 않습니다.</li>
+      </ol>
+    </div>
+  </details>
+
+  <h2>설정 후 확인 사항</h2>
+  <ul>
+    <li>소속 기관에서 접속되면 다른 기관이나 해외에서도 같은 설정 그대로 접속됩니다.</li>
+    <li>소속 기관 비밀번호를 바꾸면 단말에 저장된 eduroam 비밀번호도 바꿉니다. 옛 비밀번호로 계속 시도하면 계정이 잠길 수 있습니다.</li>
+    <li>소속 기관이 인증서 변경을 공지하면 안내에 따라 설정을 고칩니다. CA 인증서를 지정해 두었다면 대개 그대로 접속됩니다.</li>
+  </ul>
+  <p>접속이 되지 않으면 <a href="{{ '/connect/help/' | relative_url }}">접속이 안 될 때</a>를 확인하세요.</p>
 
   <h2>보안 정책</h2>
   <ul>
@@ -86,4 +109,13 @@ description: "eduroam 접속에 필요한 설정값과 Windows·macOS·iOS·Andr
     <li>저작권 침해, 무단 침입, 악성코드 유포 등 관계 법령을 위반하는 행위가 확인되면 사전 통보 없이 접속을 차단하고 소속 기관에 통보합니다.</li>
   </ul>
   <p><a href="{{ '/policy/' | relative_url }}">대한민국 eduroam 이용 정책 →</a></p>
+
+  <h2>참고 문서</h2>
+  <p>각 설정값의 의미는 eduroam KR 위키의 기술 문서에서 설명합니다.</p>
+  <ul>
+    <li><a href="https://wiki.eduroam.kreonet.net/tech/client-validation/">운영체제별 서버 확인 설정</a>: CA 인증서와 도메인을 지정하는 이유, 운영체제별 차이</li>
+    <li><a href="https://wiki.eduroam.kreonet.net/tech/identity-and-realm/">익명 ID 와 realm</a>: 아이디의 <code>@소속기관도메인</code>과 익명 아이디의 역할</li>
+    <li><a href="https://wiki.eduroam.kreonet.net/tech/eap-certificates/">RADIUS 서버 인증서와 CA</a>: 기관이 공개하는 인증서와 지문</li>
+    <li><a href="https://wiki.eduroam.kreonet.net/tech/credentials/">계정 · 비밀번호와 EAP 방식</a>: PEAP 와 TTLS, 2단계 인증 방식</li>
+  </ul>
 </div>

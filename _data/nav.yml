@@ -6,6 +6,14 @@
   icon: fa-wifi
   title: 접속 방법
   title_en: Connecting
+  children_home: false
+  children:
+    - url: /connect/
+      title: 설정 방법
+      title_en: Setup
+    - url: /connect/help/
+      title: 접속이 안 될 때
+      title_en: Troubleshooting
 - url: /map/
   icon: fa-map-location-dot
   title: 서비스 지역
